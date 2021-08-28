@@ -4,7 +4,7 @@ import s from './Container.module.css';
 
 const Container = ({ children }) => (
   <>
-    <h1 className={s.title}>React. Home Work 7 - Phonebook</h1>
+    <h1 className={s.title}>React. Home Work 8 - Phonebook</h1>
     <div className={s.container}>{children}</div>
   </>
 );
