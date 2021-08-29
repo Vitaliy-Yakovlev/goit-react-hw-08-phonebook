@@ -3,12 +3,15 @@ import { AiTwotoneDelete } from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from 'react-loader-spinner';
-import { deleteContact, fetchContacts } from '../../redux/contacts-operations';
+import {
+  deleteContact,
+  fetchContacts,
+} from '../../redux/contacts/contacts-operations';
 import {
   getVisibleContacts,
   getError,
   getLoading,
-} from '../../redux/contacts-selectors';
+} from '../../redux/contacts/contacts-selectors';
 import s from './Contacts.module.css';
 
 export default function Contacts() {

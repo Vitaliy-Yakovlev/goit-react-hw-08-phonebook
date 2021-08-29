@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { addContact } from '../../redux/contacts-operations';
-import { getError } from '../../redux/contacts-selectors';
+import { addContact } from '../../redux/contacts/contacts-operations';
+import { getError } from '../../redux/contacts/contacts-selectors';
 import s from './Form.module.css';
 
 export default function Form() {

@@ -48,11 +48,9 @@ const errorReducer = createReducer(null, {
   [deleteContactsRequest]: () => null,
 });
 
-const contactsReducer = combineReducers({
+export const contactsReducer = combineReducers({
   items: itemReducer,
   filter: filterReducer,
   loading: loadingReducer,
   error: errorReducer,
 });
-
-export default contactsReducer;
