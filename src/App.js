@@ -13,23 +13,24 @@ import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import NotFoundPage from './components/pages/NotFoundPage';
-import { authOperations, authSelectors } from './redux/auth';
-import PrivateRouter from './components/Navigations/PrivateRoute/PrivateRoute';
-import PublicRouter from './components/Navigations/PublicRoute/PublicRoute';
+import { fetchCurrentUser } from './redux/auth/auth-operations';
+import { getIsFetchingCurrent } from './redux/auth/auth-selectors';
+import PrivateRouter from './components/Navigations/PrivateRoute';
+import PublicRouter from './components/Navigations/PublicRoute';
 
 export default function Phonebook() {
   const dispatch = useDispatch();
-  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+  const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
 
   useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   return (
     <>
-      {!isFetchingCurrentUser && (
-        <Container>
-          <AppBar />
+      <Container>
+        <AppBar />
+        {!isFetchingCurrentUser && (
           <Switch>
             <PublicRouter exact path="/">
               <HomePage />
@@ -37,16 +38,18 @@ export default function Phonebook() {
 
             <PublicRouter path="/login" redirectTo="/contacts" restricted>
               <LoginPage />
+              <ToastContainer position="top-center" autoClose={5000} />
             </PublicRouter>
 
             <PublicRouter path="/register" restricted>
               <RegisterPage />
+              <ToastContainer position="top-center" autoClose={5000} />
             </PublicRouter>
 
             <PrivateRouter path="/contacts" redirectTo="/login">
               <Heading text="Phonebook" />
               <Form />
-              <ToastContainer autoClose={5000} />
+              <ToastContainer autoClose={3000} />
               <Heading text="Contacts" />
               <Filter />
               <Contacts />
@@ -56,8 +59,8 @@ export default function Phonebook() {
               <NotFoundPage />
             </Route>
           </Switch>
-        </Container>
-      )}
+        )}
+      </Container>
     </>
   );
 }

@@ -1,5 +1,21 @@
 import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+
+import {
+  registerUserRequest,
+  registerUserSuccess,
+  registerUserError,
+  logInUserRequest,
+  logInUserSuccess,
+  logInUserError,
+  logOutUserRequest,
+  logOutUserSuccess,
+  logOutUserError,
+  fetchCurrentUserRequest,
+  fetchCurrentUserSuccess,
+  fetchCurrentUserError,
+} from './auth-actions';
+
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const token = {
   set(token) {
@@ -10,124 +26,54 @@ const token = {
   },
 };
 
-const register = createAsyncThunk('auth/register', async credentials => {
-  try {
-    const { data } = await axios.post('/users/signup', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    // TODO: Добавить обработку ошибки error.message
-  }
-});
+export const registerUser = credentials => async dispatch => {
+  dispatch(registerUserRequest());
 
-const logIn = createAsyncThunk('auth/login', async credentials => {
-  try {
-    const { data } = await axios.post('/users/login', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    // TODO: Добавить обработку ошибки error.message
-  }
-});
-
-const logOut = createAsyncThunk('auth/logout', async () => {
-  try {
-    await axios.post('/users/logout');
-    token.unset();
-  } catch (error) {
-    // TODO: Добавить обработку ошибки error.message
-  }
-});
-
-const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (persistedToken === null) {
-      return thunkAPI.rejectWithValue();
-    }
-
-    token.set(persistedToken);
-    try {
-      const { data } = await axios.get('/users/current');
-      return data;
-    } catch (error) {
-      // TODO: Добавить обработку ошибки error.message
-    }
-  },
-);
-
-const operations = {
-  register,
-  logOut,
-  logIn,
-  fetchCurrentUser,
+  axios
+    .post('/users/signup', credentials)
+    .then(({ data }) => {
+      token.set(data.token);
+      return dispatch(registerUserSuccess(data));
+    })
+    .catch(error => dispatch(registerUserError(error.message)));
 };
-export default operations;
 
-// import {
-//   registerUserRequest,
-//   registerUserSuccess,
-//   registerUserError,
-//   logInUserRequest,
-//   logInUserSuccess,
-//   logInUserError,
-//   logOutUserRequest,
-//   logOutUserSuccess,
-//   logOutUserError,
-//   fetchCurrentUserRequest,
-//   fetchCurrentUserSuccess,
-//   fetchCurrentUserError,
-// } from './auth-actions';
+export const logInUser = credentials => async dispatch => {
+  dispatch(logInUserRequest());
 
-// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+  axios
+    .post('/users/login', credentials)
+    .then(({ data }) => {
+      token.set(data.token);
+      dispatch(logInUserSuccess(data));
+    })
+    .catch(error => dispatch(logInUserError(error.message)));
+};
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
+export const logOutUser = () => async dispatch => {
+  dispatch(logOutUserRequest());
 
-// export const registerUser = () => async dispatch => {
-//   dispatch(registerUserRequest());
+  axios
+    .post('/users/logout')
+    .then(({ data }) => {
+      token.unset();
+      dispatch(logOutUserSuccess(data));
+    })
+    .catch(error => dispatch(logOutUserError(error.message)));
+};
 
-//   axios
-//     .post('/users/login')
-//     .then(({ data }) => dispatch(registerUserSuccess(data)))
-//     .then(({ data }) => token.set(data.token))
-//     .catch(error => dispatch(registerUserError(error.message)));
-// };
+export const fetchCurrentUser = () => (dispatch, thunkAPI) => {
+  const persistedToken = thunkAPI().auth.token;
 
-// export const logInUser = () => async dispatch => {
-//   dispatch(logInUserRequest());
+  if (!persistedToken) {
+    return;
+  }
+  token.set(persistedToken);
 
-//   axios
-//     .post('/users/login')
-//     .then(({ data }) => dispatch(logInUserSuccess(data)))
-//     .then(({ data }) => token.set(data.token))
-//     .catch(error => dispatch(logInUserError(error.message)));
-// };
+  dispatch(fetchCurrentUserRequest());
 
-// export const logOutInUser = () => async dispatch => {
-//   dispatch(logOutUserRequest());
-
-//   axios
-//     .post('/users/login')
-//     .then(({ data }) => dispatch(logOutUserSuccess(data)))
-//     .then(({ data }) => token.set(data.token))
-//     .catch(error => dispatch(logOutUserError(error.message)));
-// };
-
-// export const fetchCurrentUser = () => async dispatch => {
-//   dispatch(fetchCurrentUserRequest());
-
-//   axios
-//     .get('/users/current')
-//     .then(({ data }) => dispatch(fetchCurrentUserSuccess(data)))
-//     .catch(error => dispatch(fetchCurrentUserError(error.message)));
-// };
+  axios
+    .get('/users/current')
+    .then(({ data }) => dispatch(fetchCurrentUserSuccess(data)))
+    .catch(error => dispatch(fetchCurrentUserError(error.message)));
+};

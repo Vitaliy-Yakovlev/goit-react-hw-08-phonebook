@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { authOperations } from '../../../redux/auth';
+import { toast } from 'react-toastify';
+import { logInUser } from '../../../redux/auth/auth-operations';
 import s from './LoginPage.module.css';
 
 export default function LoginPage() {
@@ -21,9 +22,19 @@ export default function LoginPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(authOperations.logIn({ email, password }));
-    setEmail('');
-    setPassword('');
+    dispatch(logInUser({ email, password }));
+    if (email.length < 0 && password.length < 0) {
+      setEmail('');
+      setPassword('');
+    }
+
+    if (email === '') {
+      toast.warning(`Заполни поля email`);
+    }
+
+    if (password === '') {
+      toast.warning(`Заполни поля password`);
+    }
   };
 
   return (

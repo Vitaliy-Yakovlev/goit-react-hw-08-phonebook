@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { authOperations } from '../../../redux/auth';
+import { toast } from 'react-toastify';
+import { registerUser } from '../../../redux/auth/auth-operations';
 import s from './RegisterPage.module.css';
 
 export default function RegisterView() {
@@ -24,10 +25,23 @@ export default function RegisterView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
+    dispatch(registerUser({ name, email, password }));
+    if (name.length < 0 || email.length < 0 || password.length < 0) {
+      setName('');
+      setEmail('');
+      setPassword('');
+    }
+    if (name === '') {
+      toast.warning('Заполни поля "Имя"');
+    }
+
+    if (email === '') {
+      toast.warning('Заполни поля "Почта"');
+    }
+
+    if (password === '') {
+      toast.warning('Заполни поля "Пароль"');
+    }
   };
 
   return (
