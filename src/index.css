@@ -6,13 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* background-image: url(./images/173e11b5462d86831a06bdd29d158ec6.jpg); */
+  background-image: url(./images/structure-texture.jpg);
 
-  background-repeat: no-repeat;
-
-  /* background-position: -50px -300px; */
-
-  background-color: rgb(123, 182, 211);
+  background-size: cover;
 }
 
 code {

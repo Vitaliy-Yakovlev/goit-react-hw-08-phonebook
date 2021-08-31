@@ -1,16 +1,20 @@
 .list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   list-style: none;
   margin: 0;
-  padding: 5px;
+  margin-top: 20px;
 }
 
 .item {
   display: flex;
   justify-content: space-between;
+  width: 400px;
   align-items: center;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
-  color: #ffffff;
+  color: rgb(68, 68, 68);
 }
 
 .item:not(:first-child) {
@@ -19,14 +23,15 @@
 
 .link {
   text-decoration: none;
-  color: #ffffff;
+  color: rgb(68, 68, 68);
 }
 
 .btn {
   border: none;
   padding: 5px 10px;
-  background-color: #51cde6;
+  background-color: rgba(68, 221, 238, 0.8);
   color: rgb(225, 29, 71);
+  margin-left: 20px;
   font-weight: 400;
   font-family: inherit;
   cursor: pointer;
@@ -34,13 +39,13 @@
   box-shadow: 1px 2px 2px 0 rgb(0 0 0 / 0.5);
   transition: box-shadow 250ms linear;
 
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .btn:hover,
 .btn:focus {
   background-color: rgb(225, 29, 71);
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 
 .loader {

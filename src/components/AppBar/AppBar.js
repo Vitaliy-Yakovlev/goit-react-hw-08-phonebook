@@ -4,7 +4,6 @@ import Navigations from '../Navigations';
 import UserMenu from '../UserMenu';
 import AuthNavigation from '../Navigations/AuthNavigation';
 import { getIsLoggedIn } from '../../redux/auth/auth-selectors';
-
 import s from './AppBar.module.css';
 
 export default function AppBar() {

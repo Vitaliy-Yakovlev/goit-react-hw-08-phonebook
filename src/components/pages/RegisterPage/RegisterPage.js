@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { TextField, FormControl, FormHelperText } from '@material-ui/core';
 import { registerUser } from '../../../redux/auth/auth-operations';
 import s from './RegisterPage.module.css';
 
@@ -45,37 +46,61 @@ export default function RegisterView() {
   };
 
   return (
-    <div>
-      <h1>Страница регистрации</h1>
+    <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
+      <FormControl>
+        <div className={s.tumps}>
+          <div className={s.container}>
+            <TextField
+              className={s.input}
+              label="Name"
+              variant="outlined"
+              size="small"
+              placeholder="Vitaliy Yakovlev"
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleChange}
+              required
+            />
 
-      <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
-        <label className={s.label}>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
+            <FormHelperText className={s.p}>Ведите Имя</FormHelperText>
+          </div>
 
-        <label className={s.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
+          <div className={s.container}>
+            <TextField
+              className={s.input}
+              label="Email"
+              variant="outlined"
+              size="small"
+              placeholder="@"
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />
+            <FormHelperText>Ведите EMAIL</FormHelperText>
+          </div>
 
-        <label className={s.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
+          <div className={s.container}>
+            <TextField
+              className={s.input}
+              label="Password"
+              variant="outlined"
+              size="small"
+              placeholder="***"
+              type="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              required
+            />
+            <FormHelperText>Ведите Пароль</FormHelperText>
+          </div>
+          <button className={s.btn} type="submit">
+            Войти
+          </button>
+        </div>
+      </FormControl>
+    </form>
   );
 }

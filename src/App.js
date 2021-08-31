@@ -52,6 +52,7 @@ export default function Phonebook() {
               <ToastContainer autoClose={3000} />
               <Heading text="Contacts" />
               <Filter />
+
               <Contacts />
             </PrivateRouter>
 

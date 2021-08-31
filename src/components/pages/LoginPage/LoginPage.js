@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { TextField, FormControl, FormHelperText } from '@material-ui/core';
 import { logInUser } from '../../../redux/auth/auth-operations';
 import s from './LoginPage.module.css';
 
@@ -15,6 +16,7 @@ export default function LoginPage() {
         return setEmail(value);
       case 'password':
         return setPassword(value);
+
       default:
         return;
     }
@@ -38,32 +40,46 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>Страница логина</h1>
+    <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
+      <FormControl>
+        <div className={s.tumps}>
+          <div className={s.container}>
+            <TextField
+              className={s.input}
+              label="Email"
+              variant="outlined"
+              size="small"
+              placeholder="@"
+              value={email}
+              onChange={handleChange}
+              type="email"
+              name="email"
+              required
+            />
 
-      <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
-        <label className={s.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
+            <FormHelperText>Ведите EMAIL</FormHelperText>
+          </div>
 
-        <label className={s.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit">Войти</button>
-      </form>
-    </div>
+          <div className={s.container}>
+            <TextField
+              className={s.input}
+              label="Password"
+              variant="outlined"
+              size="small"
+              placeholder="***"
+              value={password}
+              onChange={handleChange}
+              type="password"
+              name="password"
+              required
+            />
+            <FormHelperText>Ведите номер телефона</FormHelperText>
+          </div>
+          <button className={s.btn} type="submit">
+            Войти
+          </button>
+        </div>
+      </FormControl>
+    </form>
   );
 }

@@ -40,13 +40,19 @@ export default function Contacts() {
       {contacts.map(({ name, id, number }) => {
         return (
           <li className={s.item} key={id}>
-            {name}:{' '}
-            <a className={s.link} href={`tel:${number}`}>
-              {number}
-            </a>
-            <button className={s.btn} type="button" onClick={() => onClick(id)}>
-              <AiTwotoneDelete />
-            </button>
+            {name}:
+            <div>
+              <a className={s.link} href={`tel:${number}`}>
+                {number}
+              </a>
+              <button
+                className={s.btn}
+                type="button"
+                onClick={() => onClick(id)}
+              >
+                <AiTwotoneDelete />
+              </button>
+            </div>
           </li>
         );
       })}

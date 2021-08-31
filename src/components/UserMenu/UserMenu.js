@@ -13,7 +13,11 @@ export default function UserMenu() {
     <div className={s.container}>
       <img src={avatar} alt="" width="32" className={s.avatar} />
       <span className={s.name}>Добро пожаловать, {name}</span>
-      <button type="button" onClick={() => dispatch(logOutUser())}>
+      <button
+        className={s.btn}
+        type="button"
+        onClick={() => dispatch(logOutUser())}
+      >
         Выйти
       </button>
     </div>
