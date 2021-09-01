@@ -15,15 +15,22 @@ import { getIsFetchingCurrent } from './redux/auth/auth-selectors';
 import PrivateRouter from './components/Navigations/PrivateRoute';
 import PublicRouter from './components/Navigations/PublicRoute';
 
-// import HomePage from './components/pages/HomePage';
-// import LoginPage from './components/pages/LoginPage';
-// import RegisterPage from './components/pages/RegisterPage';
-// import NotFoundPage from './components/pages/NotFoundPage';
-
-const HomePage = lazy(() => import('./components/pages/HomePage'));
-const LoginPage = lazy(() => import('./components/pages/LoginPage'));
-const RegisterPage = lazy(() => import('./components/pages/RegisterPage'));
-const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage'));
+const HomePage = lazy(() =>
+  import('./components/pages/HomePage' /*webpackChunkName: "home-page" */),
+);
+const LoginPage = lazy(() =>
+  import('./components/pages/LoginPage' /*webpackChunkName: "login-page" */),
+);
+const RegisterPage = lazy(() =>
+  import(
+    './components/pages/RegisterPage' /*webpackChunkName: "register-page" */
+  ),
+);
+const NotFoundPage = lazy(() =>
+  import(
+    './components/pages/NotFoundPage' /*webpackChunkName: "not-found-page" */
+  ),
+);
 
 export default function Phonebook() {
   const dispatch = useDispatch();
