@@ -47,7 +47,7 @@ export default function Phonebook() {
         {!isFetchingCurrentUser && (
           <Suspense
             fallback={
-              <Loader type="ThreeDots" color="#51cde6" className="loaderApp" />
+              <Loader type="Oval" color="#51cde6" className="loaderApp" />
             }
           >
             <Switch>
