@@ -5,7 +5,7 @@ import { TextField, FormControl, FormHelperText } from '@material-ui/core';
 import { registerUser } from '../../../redux/auth/auth-operations';
 import s from './RegisterPage.module.css';
 
-export default function RegisterView() {
+export default function RegisterPage() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
