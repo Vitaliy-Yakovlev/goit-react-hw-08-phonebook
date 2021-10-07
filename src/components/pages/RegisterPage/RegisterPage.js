@@ -55,7 +55,7 @@ export default function RegisterPage() {
           <div className={s.container}>
             <TextField
               inputProps={{ pattern: patternName }}
-              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, d'Artagnan и т. п."
               className={s.input}
               label="Name"
               variant="outlined"
