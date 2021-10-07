@@ -68,7 +68,7 @@ export default function RegisterPage() {
               required
             />
 
-            <FormHelperText className={s.p}>Ведите Имя</FormHelperText>
+            <FormHelperText className={s.p}>Введите Имя</FormHelperText>
           </div>
 
           <div className={s.container}>
@@ -83,7 +83,7 @@ export default function RegisterPage() {
               value={email}
               onChange={handleChange}
             />
-            <FormHelperText>Ведите EMAIL</FormHelperText>
+            <FormHelperText>Введите EMAIL</FormHelperText>
           </div>
 
           <div className={s.container}>
@@ -99,7 +99,7 @@ export default function RegisterPage() {
               onChange={handleChange}
               required
             />
-            <FormHelperText>Ведите Пароль</FormHelperText>
+            <FormHelperText>Введите Пароль</FormHelperText>
           </div>
           <button className={s.btn} type="submit">
             Войти

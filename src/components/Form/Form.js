@@ -85,7 +85,7 @@ export default function Form() {
                 required
               />
 
-              <FormHelperText>Ведите имя</FormHelperText>
+              <FormHelperText>Введите имя</FormHelperText>
             </div>
 
             <div className={s.container}>
@@ -103,7 +103,7 @@ export default function Form() {
                 title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                 required
               />
-              <FormHelperText>Ведите номер телефона</FormHelperText>
+              <FormHelperText>Введите номер телефона</FormHelperText>
             </div>
             <button className={s.btn} type="submit">
               Add contact
